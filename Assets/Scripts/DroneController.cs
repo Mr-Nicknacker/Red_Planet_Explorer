@@ -23,6 +23,7 @@ public class DroneController : MonoBehaviour
     }
     private Rigidbody _droneRigidbody;
     private DroneFuel _droneFuel;
+    private DroneDestructor _droneDestructor;
 
     private DroneState _droneState;
     private LandingState _landingState;
@@ -39,6 +40,8 @@ public class DroneController : MonoBehaviour
 
         _droneFuel = GetComponent<DroneFuel>();
         _droneState = DroneState.WatingToStart;
+
+        _droneDestructor = GetComponent<DroneDestructor>();
     }
     private void FixedUpdate()
     {
@@ -102,13 +105,12 @@ public class DroneController : MonoBehaviour
     {
         float landingSpeed = collision.relativeVelocity.magnitude;
         var landingAngleCoef = Vector3.Dot(Vector3.up, transform.up);
-        Debug.Log($"landing speed is {landingSpeed}, larger than threshold {landingSpeed > _landingSpeedThreshold}");
-        Debug.Log($"landing angle is {landingAngleCoef}, larger than threshold {landingAngleCoef < _landingAngleThreshold}");
 
         if (landingSpeed > _landingSpeedThreshold || landingAngleCoef < _landingAngleThreshold)
         {
             SetDroneState(DroneState.GameOver);
             SetLandingState(LandingState.Crashed);
+            _droneDestructor.Detonate();
             return;
         }
 
@@ -120,6 +122,7 @@ public class DroneController : MonoBehaviour
         else
         {
             SetLandingState(LandingState.Crashed);
+            _droneDestructor.Detonate();
         }
     }
     private void OnTriggerEnter(Collider other)

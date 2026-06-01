@@ -6,7 +6,7 @@ public class DroneFuel : MonoBehaviour
     private const float MAX_FUEL = 100;
 
     [SerializeField] private float _consumptionPerSecond;
-    private static float _currentFuel;
+    private float _currentFuel;
 
     public static event Action<float> onFuelChangeNormalized;
     private void Start()

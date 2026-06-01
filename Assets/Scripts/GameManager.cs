@@ -1,19 +1,25 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("UI Canvases")]
     [SerializeField] private GameObject _victoryWindowCanvas;
     [SerializeField] private GameObject _defeatWindowCanvas;
     [SerializeField] private GameObject _gameHUD;
-
+    [Header("UI Buttons")]
     [SerializeField] private Button _resetGameButton;
+    [SerializeField] private Button _retryButton;
     [SerializeField] private Button _nextLevelButton;
+
+    [SerializeField] private float _timeToShowVictory;
+    [SerializeField] private float _timeToShowDefeat;
     private void Awake()
     {
         HandleButtonInput();
-        ShowGameWindow();        
+        ShowGameWindow(); 
     }
     private void Start()
     {
@@ -22,14 +28,13 @@ public class GameManager : MonoBehaviour
 
     private void Drone_onLandingStateChange(DroneController.LandingState state)
     {
-        Debug.Log(state);
         switch (state)
         {
             case DroneController.LandingState.Crashed:
-                ShowDefeatWindow();
+                StartCoroutine(ShowDefeatWindow());
                 break;
             case DroneController.LandingState.Landed:
-                ShowVictoryWindow();
+                StartCoroutine(ShowVictoryWindow());
                 break;
         }
     }
@@ -38,22 +43,24 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    private void ShowDefeatWindow()
+    private IEnumerator ShowDefeatWindow()
     {
         _victoryWindowCanvas.SetActive(false);
+        yield return new WaitForSeconds(_timeToShowDefeat);
         _defeatWindowCanvas.SetActive(true);
     }
-    private void ShowVictoryWindow()
+    private IEnumerator ShowVictoryWindow()
     {
-        _victoryWindowCanvas.SetActive(true);
         _defeatWindowCanvas.SetActive(false);
-
+        yield return new WaitForSeconds(_timeToShowVictory);
+        _victoryWindowCanvas.SetActive(true);
+        
     }
     private void ShowGameWindow()
     {
         _gameHUD.SetActive(true);
         _victoryWindowCanvas.SetActive(false);
-        _defeatWindowCanvas.SetActive(false);
+        _defeatWindowCanvas.gameObject.SetActive(false);
     }
     private void ResetGame()
     {
@@ -64,5 +71,12 @@ public class GameManager : MonoBehaviour
     private void HandleButtonInput()
     {
         _resetGameButton.onClick.AddListener(ResetGame);
+        _retryButton.onClick.AddListener(ResetGame);
+        _nextLevelButton.onClick.AddListener(ResetGame);
+    }
+    private void OnDestroy()
+    {
+        DroneController.onLandingStateChange -= Drone_onLandingStateChange;
+        StopAllCoroutines();
     }
 }

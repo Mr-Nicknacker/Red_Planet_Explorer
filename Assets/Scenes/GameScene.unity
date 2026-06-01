@@ -176,6 +176,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec7849b72671c45499e99cfc6898d92b, type: 3}
+--- !u!1 &220727128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8351567669282563687, guid: f3107da07dd1e334683ece196989377d, type: 3}
+  m_PrefabInstance: {fileID: 2822385666437206905}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &231138280
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +270,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231138280}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -2115,7 +2120,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1338487545}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
@@ -2262,7 +2267,7 @@ GameObject:
   - component: {fileID: 1548192622}
   - component: {fileID: 1548192621}
   m_Layer: 5
-  m_Name: RestartButton
+  m_Name: RetryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3165,6 +3170,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroneFuel
   _consumptionPerSecond: 5
+--- !u!114 &1887098195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887098187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1948bdc7ba4285418d97811552d0f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DroneDestructor
+  _droneMesh: {fileID: 220727128}
+  _explosionForce: 5
+  _explosionRadius: 5
+  _explodedPartsDestroyTime: 2
+  EXPLOSION_UPWARDS_MODIFIER: 0.5
 --- !u!1 &1895569932
 GameObject:
   m_ObjectHideFlags: 0
@@ -3743,7 +3765,10 @@ MonoBehaviour:
   _defeatWindowCanvas: {fileID: 231138280}
   _gameHUD: {fileID: 653570901}
   _resetGameButton: {fileID: 1267269535}
+  _retryButton: {fileID: 1548192621}
   _nextLevelButton: {fileID: 1440996465}
+  _timeToShowVictory: 10
+  _timeToShowDefeat: 10
 --- !u!1 &2002295423
 GameObject:
   m_ObjectHideFlags: 0
@@ -3902,6 +3927,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 877246176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2059721056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2059721057}
+  - component: {fileID: 2059721058}
+  m_Layer: 0
+  m_Name: LandedUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2059721057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059721056}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2059721058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059721056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91f93fc870a5f1c48b8f7f715fe2d7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LandedUI
+  _victoryWindowCanvas: {fileID: 1338487545}
+  _defeatWindowCanvas: {fileID: 231138280}
+  _retryButton: {fileID: 1548192621}
 --- !u!1 &2077983405
 GameObject:
   m_ObjectHideFlags: 0
@@ -3993,7 +4065,7 @@ GameObject:
   - component: {fileID: 2129994219}
   - component: {fileID: 2129994218}
   m_Layer: 5
-  m_Name: RestartButtonTxt
+  m_Name: RetryButtonTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4208,6 +4280,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3171341516585977579, guid: f3107da07dd1e334683ece196989377d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1887098193}
+    - targetCorrespondingSourceObject: {fileID: 3171341516585977579, guid: f3107da07dd1e334683ece196989377d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1887098195}
   m_SourcePrefab: {fileID: 100100000, guid: f3107da07dd1e334683ece196989377d, type: 3}
 --- !u!1001 &5354281686208762478
 PrefabInstance:
@@ -4275,6 +4350,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 2822385666437206905}
   - {fileID: 653570905}
+  - {fileID: 2059721057}
   - {fileID: 1338487549}
   - {fileID: 231138284}
   - {fileID: 2077983408}
