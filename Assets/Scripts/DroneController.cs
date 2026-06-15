@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 
 public class DroneController : MonoBehaviour
 {
@@ -14,6 +12,7 @@ public class DroneController : MonoBehaviour
     private DroneFuel _droneFuel;
     private DroneDestructor _droneDestructor;
     private DroneState _droneState;
+    private Vector2 _movementDirection;
 
     private enum DroneState
     {
@@ -25,12 +24,12 @@ public class DroneController : MonoBehaviour
     {
         Crashed,
         Landed
-    }     
+    }
 
     public static event Action<int> onPointsPickup;
     public static event Action<float> onFuelPickup;
     public static event Action<LandingState> onLandingStateChange;
-
+    
     private void Awake()
     {
         _droneRigidbody = GetComponent<Rigidbody>();
@@ -43,14 +42,14 @@ public class DroneController : MonoBehaviour
         _droneDestructor = GetComponent<DroneDestructor>();
         _droneFuel.ResetFuel();
     }
+
     private void FixedUpdate()
     {
+        _movementDirection = PlayerInputListener.GetInstance().GetMovementVector2();
         switch (_droneState)
         {
             case DroneState.WatingToStart:
-                if ((Keyboard.current.wKey.isPressed) ||
-                    Keyboard.current.aKey.isPressed ||
-                    Keyboard.current.dKey.isPressed)
+                if (_movementDirection!=Vector2.zero)
                 {
                     _droneRigidbody.useGravity = true;
                     _droneState = DroneState.Normal;
@@ -62,25 +61,23 @@ public class DroneController : MonoBehaviour
                 {
                     return;
                 }
-                if ((Keyboard.current.wKey.isPressed) ||
-                    Keyboard.current.aKey.isPressed ||
-                    Keyboard.current.dKey.isPressed)
+                if ((_movementDirection != Vector2.zero))
                 {
                     _droneFuel.ConsumeFuel();
                 }
 
-                if (Keyboard.current.wKey.isPressed)
+                if (_movementDirection.y>0)
                 {
-                    ApplyUpForce();
+                    ApplyUpForce();                    
                 }
-                if (Keyboard.current.aKey.isPressed)
+                if (_movementDirection.x<0)
                 {
-                    ApplyLeftYaw();
+                    ApplyLeftYaw();                    
 
                 }
-                if (Keyboard.current.dKey.isPressed)
+                if (_movementDirection.x>0)
                 {
-                    ApplyRightYaw();
+                    ApplyRightYaw();                    
                 }
                 break;
             case DroneState.GameOver:

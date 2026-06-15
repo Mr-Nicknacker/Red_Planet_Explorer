@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PointsGiver
   _pointsToGive: 100
+  _popupObject: {fileID: 831358464652609554, guid: 7cec99e61cc258e45a5a6d13cf957535, type: 3}
 --- !u!65 &5265028493806128518
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     {
         DroneController.onLandingStateChange += Drone_onLandingStateChange;
         RetryButtonNotifier.OnRetryButtonClick += ResetGame;
+        PlayerInputListener.onPausePressed += PauseUnpause;
     }
 
     private void Drone_onLandingStateChange(DroneController.LandingState state)
@@ -85,18 +86,29 @@ public class GameManager : MonoBehaviour
         _gameHUD.SetActive(true);
         _pauseWindowCanvas.SetActive(false);
     }
+    private void PauseUnpause()
+    {
+        if (Time.timeScale > 0)
+        {
+            PauseGame();
+        }
+        else
+        {
+            UnPauseGame();
+        }
+    }
     private void HandleButtonInput()
     {
         _nextLevelButton.onClick.AddListener(ResetGame);
         _toMainMenuButton.onClick.AddListener(OpenMainMenu);
         _pauseButton.onClick.AddListener(PauseGame);
         _resumeGame.onClick.AddListener(UnPauseGame);
-
     }
     private void OnDestroy()
     {
         DroneController.onLandingStateChange -= Drone_onLandingStateChange;
         RetryButtonNotifier.OnRetryButtonClick -= ResetGame;
+        PlayerInputListener.onPausePressed -= PauseUnpause;
         StopAllCoroutines();
     }
 }
