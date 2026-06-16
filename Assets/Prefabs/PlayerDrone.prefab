@@ -1500,6 +1500,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8312838751304779972}
   - component: {fileID: 5109845320579374019}
+  - component: {fileID: 6945692991483344168}
+  - component: {fileID: 4070660432656182576}
+  - component: {fileID: 7018416065433842824}
   m_Layer: 0
   m_Name: PlayerDrone
   m_TagString: Untagged
@@ -1532,8 +1535,8 @@ Rigidbody:
   m_GameObject: {fileID: 3171341516585977579}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 1
+  m_AngularDamping: 2.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1547,9 +1550,55 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_Constraints: 56
   m_CollisionDetection: 0
+--- !u!114 &6945692991483344168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3171341516585977579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e13606dd4eee04c9f84b0fb7be8d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DroneController
+  _upForce: 600
+  _sideForce: 150
+  _landingSpeedThreshold: 2.5
+  _landingAngleThreshold: 0.95
+--- !u!114 &4070660432656182576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3171341516585977579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2eaf4f6f399864dab83ed93756cac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DroneFuel
+  _consumptionPerSecond: 5
+--- !u!114 &7018416065433842824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3171341516585977579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1948bdc7ba4285418d97811552d0f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DroneDestructor
+  _droneMesh: {fileID: 8351567669282563687}
+  _explosionForce: 5
+  _explosionRadius: 5
+  _explodedPartsDestroyTime: 2
+  _explosionUpwardsModifier: 0
 --- !u!1 &3659979716281864465
 GameObject:
   m_ObjectHideFlags: 0

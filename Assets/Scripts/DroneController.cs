@@ -25,11 +25,22 @@ public class DroneController : MonoBehaviour
         Crashed,
         Landed
     }
-
-    public static event Action<int> onPointsPickup;
-    public static event Action<float> onFuelPickup;
+        
     public static event Action<LandingState> onLandingStateChange;
-    
+    public static event Action<OnPointsPickupArgs> onPointsPickup;
+    public static event Action<OnFuelPickupArgs> onFuelPickup;
+
+    public class OnPointsPickupArgs : EventArgs
+    {
+        public int pointsAmount;
+        public Transform pickupTransform;
+    };
+    public class OnFuelPickupArgs : EventArgs
+    {
+        public float fuelAmount;
+        public Transform pickupTransform;
+    };
+
     private void Awake()
     {
         _droneRigidbody = GetComponent<Rigidbody>();
@@ -37,10 +48,11 @@ public class DroneController : MonoBehaviour
         _droneRigidbody.useGravity = false;
 
         _droneFuel = GetComponent<DroneFuel>();
-        _droneState=DroneState.WatingToStart;
+        _droneState = DroneState.WatingToStart;
 
         _droneDestructor = GetComponent<DroneDestructor>();
         _droneFuel.ResetFuel();
+        Debug.Log($"Im in {GetType().FullName} in Awake. Current fuel is {_droneFuel.GetCurrentFuel()}");
     }
 
     private void FixedUpdate()
@@ -49,7 +61,7 @@ public class DroneController : MonoBehaviour
         switch (_droneState)
         {
             case DroneState.WatingToStart:
-                if (_movementDirection!=Vector2.zero)
+                if (_movementDirection != Vector2.zero)
                 {
                     _droneRigidbody.useGravity = true;
                     _droneState = DroneState.Normal;
@@ -66,18 +78,18 @@ public class DroneController : MonoBehaviour
                     _droneFuel.ConsumeFuel();
                 }
 
-                if (_movementDirection.y>0)
+                if (_movementDirection.y > 0)
                 {
-                    ApplyUpForce();                    
+                    ApplyUpForce();
                 }
-                if (_movementDirection.x<0)
+                if (_movementDirection.x < 0)
                 {
-                    ApplyLeftYaw();                    
+                    ApplyLeftYaw();
 
                 }
-                if (_movementDirection.x>0)
+                if (_movementDirection.x > 0)
                 {
-                    ApplyRightYaw();                    
+                    ApplyRightYaw();
                 }
                 break;
             case DroneState.GameOver:
@@ -88,7 +100,7 @@ public class DroneController : MonoBehaviour
 
     private void ApplyUpForce()
     {
-        _droneRigidbody.AddForce(transform.up * _upForce * Time.fixedDeltaTime, ForceMode.Acceleration);    
+        _droneRigidbody.AddForce(transform.up * _upForce * Time.fixedDeltaTime, ForceMode.Acceleration);
     }
     private void ApplyRightYaw()
     {
@@ -127,13 +139,25 @@ public class DroneController : MonoBehaviour
         if (other.TryGetComponent<PointsPickup>(out PointsPickup pointsPickup))
         {
             int pointsReceived = pointsPickup.GetPoints();
-            onPointsPickup?.Invoke(pointsReceived);
+            OnPointsPickupArgs pickupArgs = new()
+            {
+                pointsAmount = pointsReceived,
+                pickupTransform = pointsPickup.transform,
+            };
+
+            onPointsPickup?.Invoke(pickupArgs);
             pointsPickup.DestroySelf();
         }
         if (other.TryGetComponent<FuelPickup>(out FuelPickup fuelPickup))
         {
             float fuelReceived = fuelPickup.GetFuel();
-            onFuelPickup?.Invoke(fuelReceived);
+            OnFuelPickupArgs pickupArgs = new()
+            {
+                fuelAmount = fuelReceived,
+                pickupTransform = fuelPickup.transform,
+            };
+            Debug.Log($"Im in {GetType().FullName}. Picked up fuel amount {pickupArgs.fuelAmount}");
+            onFuelPickup?.Invoke(pickupArgs);
             fuelPickup.DestroySelf();
         }
     }

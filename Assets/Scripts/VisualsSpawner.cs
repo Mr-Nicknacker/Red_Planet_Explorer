@@ -5,17 +5,19 @@ public class VisualsSpawner : MonoBehaviour
     [Header("Pickup popups")]
     [SerializeField] private Popup _popupPrefab;
 
-    //private void Start()
-    //{
-    //    DroneController.onPointsPickup += SpawnScorePopup;
-    //    DroneController.onFuelPickup += SpawnFuelPopup;
-    //}
-    //private void SpawnScorePopup(GameObject pickupObject)
-    //{
-    //    Instantiate(_popupPrefab, pickupObject.transform.position, Quaternion.identity);
-    //}
-    //private void SpawnFuelPopup(GameObject pickupObject)
-    //{
-    //    Instantiate(_popupPrefab, pickupObject.transform.position, Quaternion.identity);
-    //}
+    private void Start()
+    {
+        DroneController.onPointsPickup += SpawnScorePopup;
+        DroneController.onFuelPickup += SpawnFuelPopup;
+    }
+
+    private void SpawnFuelPopup(DroneController.OnFuelPickupArgs args)
+    {
+        Instantiate(_popupPrefab, args.pickupTransform.position, Quaternion.identity).SetText("+FUEL");
+    }
+
+    private void SpawnScorePopup(DroneController.OnPointsPickupArgs args)
+    {
+        Instantiate(_popupPrefab, args.pickupTransform.position, Quaternion.identity).SetText($"+{args.pointsAmount}");
+    }
 }

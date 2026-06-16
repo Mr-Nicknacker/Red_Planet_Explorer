@@ -9,14 +9,18 @@ public class PickupManager : MonoBehaviour
         DroneController.onPointsPickup += AddPoints;
         DroneController.onFuelPickup += AddFuel;        
     }
-    private void AddPoints(int points)
+
+    private void AddFuel(DroneController.OnFuelPickupArgs args)
     {
-        PlayerScore.GetInstance().AddScore(points);
+        _droneFuel.AddFuel(args.fuelAmount);
+        Debug.Log($"I am in {GetType().FullName} and adding {args.fuelAmount} fuel and now i'm at {_droneFuel.GetCurrentFuel()}");
     }
-    private void AddFuel (float fuel)
+
+    private void AddPoints(DroneController.OnPointsPickupArgs args)
     {
-        _droneFuel.AddFuel(fuel);
+        PlayerScore.GetInstance().AddScore(args.pointsAmount);
     }
+
     private void OnDisable()
     {
         DroneController.onPointsPickup -= AddPoints;

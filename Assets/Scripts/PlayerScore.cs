@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class PlayerScore
 {
-    private static PlayerScore _instance;
+    
     private static int _currentScore;
 
     public static event Action<int> onScoreChange;
 
+    private static PlayerScore _instance;
     public static PlayerScore GetInstance()
     {
         if (_instance == null)
