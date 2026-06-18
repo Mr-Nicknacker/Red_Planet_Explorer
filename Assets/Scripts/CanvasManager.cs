@@ -20,7 +20,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private float _timeToShowVictory;
     [SerializeField] private float _timeToShowDefeat;
 
-    public static event Action onNextLevelButtonClick;
+    public event Action onNextLevelButtonClick;
 
     private void Awake()
     {
@@ -90,13 +90,13 @@ public class CanvasManager : MonoBehaviour
             UnPauseGame();
         }
     }
-    private void GoToNextLevel()
+    private void NotifyNextLevelButtonPressed()
     {
         onNextLevelButtonClick?.Invoke();
     }
     private void HandleButtonInput()
     {
-        _nextLevelButton.onClick.AddListener(GoToNextLevel);
+        _nextLevelButton.onClick.AddListener(NotifyNextLevelButtonPressed);
         _pauseButton.onClick.AddListener(PauseGame);
         _resumeGame.onClick.AddListener(UnPauseGame);
     }

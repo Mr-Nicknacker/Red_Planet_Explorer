@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class DroneFuel : MonoBehaviour
 {
-    private const float MAX_FUEL =100f;
-
+    [SerializeField]private float _maxFuel =100f;
     [SerializeField] private float _consumptionPerSecond;
     private float _currentFuel;
 
@@ -12,8 +11,8 @@ public class DroneFuel : MonoBehaviour
 
     public void ResetFuel()
     {
-        _currentFuel = MAX_FUEL;
-        onFuelChangeNormalized?.Invoke(_currentFuel / MAX_FUEL);
+        _currentFuel = _maxFuel;
+        onFuelChangeNormalized?.Invoke(_currentFuel / _maxFuel);
     }
     public float GetCurrentFuel()
     {
@@ -22,10 +21,9 @@ public class DroneFuel : MonoBehaviour
     public void AddFuel(float amount)
     {
         float absFuel = Mathf.Abs(amount);
-        Debug.Log($"Im in {GetType().FullName} fuel. Current fuel is {_currentFuel} and i wanto add {absFuel}");
 
-        _currentFuel = (_currentFuel + absFuel > MAX_FUEL) ? MAX_FUEL : (_currentFuel + absFuel);
-        onFuelChangeNormalized?.Invoke(_currentFuel / MAX_FUEL);
+        _currentFuel = (_currentFuel + absFuel > _maxFuel) ? _maxFuel : (_currentFuel + absFuel);
+        onFuelChangeNormalized?.Invoke(_currentFuel / _maxFuel);
     }
     public void ConsumeFuel()
     {
@@ -34,8 +32,7 @@ public class DroneFuel : MonoBehaviour
         {
             consumedFuel = _consumptionPerSecond * Time.fixedDeltaTime;
             _currentFuel = (_currentFuel - consumedFuel > 0) ? (_currentFuel - consumedFuel) : 0;
-            onFuelChangeNormalized?.Invoke(_currentFuel / MAX_FUEL);
+            onFuelChangeNormalized?.Invoke(_currentFuel / _maxFuel);
         }
-        Debug.Log($"Im in {GetType().FullName} and the current fuel is {_currentFuel}");
     }
 }

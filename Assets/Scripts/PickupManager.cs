@@ -13,7 +13,6 @@ public class PickupManager : MonoBehaviour
     private void AddFuel(DroneController.OnFuelPickupArgs args)
     {
         _droneFuel.AddFuel(args.fuelAmount);
-        Debug.Log($"I am in {GetType().FullName} and adding {args.fuelAmount} fuel and now i'm at {_droneFuel.GetCurrentFuel()}");
     }
 
     private void AddPoints(DroneController.OnPointsPickupArgs args)

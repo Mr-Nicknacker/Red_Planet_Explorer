@@ -14,13 +14,12 @@ public class StatsDisplay : MonoBehaviour
     void Start()
     {
         DroneFuel.onFuelChangeNormalized += DisplayFuel;
-        PlayerScore.onScoreChange += DisplayPoints;
+        PlayerScore.GetInstance().onScoreChange += DisplayPoints;
     }
 
     private void DisplayFuel(float normalizedFuel)
     {
         _fuelBarFill.fillAmount = normalizedFuel;
-        //Debug.Log("current fuel on display: "+fuel);
         ChangeFuelBarFillColor(normalizedFuel);
     }
     private void DisplayPoints(int points)
@@ -30,7 +29,7 @@ public class StatsDisplay : MonoBehaviour
     private void OnDisable()
     {
         DroneFuel.onFuelChangeNormalized -= DisplayFuel;
-        PlayerScore.onScoreChange -= DisplayPoints;
+        PlayerScore.GetInstance().onScoreChange -= DisplayPoints;
     }
     private void ChangeFuelBarFillColor(float fuelRemaining)
     {

@@ -11,10 +11,8 @@ public class MainMenuUI : MonoBehaviour
     }
     private void StartGame()
     {
-        //GameManager._instance.StartGame();
         SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
-        GameManager.Instance.LoadFirstLevel();
-        PlayerScore.GetInstance().ResetScore();
+        PlayerScore.GetInstance().ResetTotalScore();
     }
     private void QuitGame()
     {

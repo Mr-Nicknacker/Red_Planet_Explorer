@@ -52,8 +52,7 @@ public class DroneController : MonoBehaviour
         ChangeDroneState(DroneState.WatingToStart); ;
 
         _droneDestructor = GetComponent<DroneDestructor>();
-        _droneFuel.ResetFuel();
-        Debug.Log($"Im in {GetType().FullName} in Awake. Current fuel is {_droneFuel.GetCurrentFuel()}");
+        _droneFuel.ResetFuel();        
     }
 
     private void FixedUpdate()
@@ -96,7 +95,6 @@ public class DroneController : MonoBehaviour
             case DroneState.GameOver:
                 break;
         }
-
     }
 
     private void ApplyUpForce()
@@ -140,25 +138,26 @@ public class DroneController : MonoBehaviour
         if (other.TryGetComponent<PointsPickup>(out PointsPickup pointsPickup))
         {
             int pointsReceived = pointsPickup.GetPoints();
-            OnPointsPickupArgs pickupArgs = new()
+            Debug.Log($"Item gives {pointsReceived} points");
+            OnPointsPickupArgs pointsPickupArgs = new()
             {
                 pointsAmount = pointsReceived,
                 pickupTransform = pointsPickup.transform,
             };
 
-            onPointsPickup?.Invoke(pickupArgs);
+            onPointsPickup?.Invoke(pointsPickupArgs);
             pointsPickup.DestroySelf();
         }
         if (other.TryGetComponent<FuelPickup>(out FuelPickup fuelPickup))
         {
             float fuelReceived = fuelPickup.GetFuel();
-            OnFuelPickupArgs pickupArgs = new()
+            Debug.Log($"Item gives {fuelReceived} fuel");
+            OnFuelPickupArgs fuelPickupArgs = new()
             {
                 fuelAmount = fuelReceived,
                 pickupTransform = fuelPickup.transform,
             };
-            Debug.Log($"Im in {GetType().FullName}. Picked up fuel amount {pickupArgs.fuelAmount}");
-            onFuelPickup?.Invoke(pickupArgs);
+            onFuelPickup?.Invoke(fuelPickupArgs);
             fuelPickup.DestroySelf();
         }
     }

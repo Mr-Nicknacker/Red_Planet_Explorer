@@ -7,7 +7,7 @@ public class PlayerScore
     private int _currentScore;
     private static int _totalScore=0;
 
-    public static event Action<int> onScoreChange;
+    public event Action<int> onScoreChange;
 
     private static PlayerScore _instance;
     public static PlayerScore GetInstance()
@@ -18,7 +18,7 @@ public class PlayerScore
         }
         return _instance;
     }
-    public void ResetScore()
+    public void ResetTotalScore()
     {
         _totalScore = 0;
     }

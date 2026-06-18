@@ -17,7 +17,6 @@ public class DroneDestructor : MonoBehaviour
     public void Detonate()
     {
         Explode();
-
     }
     private void Explode()
     {

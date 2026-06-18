@@ -20,18 +20,14 @@ public class GameManager : MonoBehaviour
     {
         RetryButtonNotifier.OnRetryButtonClick += RetryLevel;
         ToMainMenuButtonNotifier.OnToMainMenuButtonClick += BackToMainMenu;
-        CanvasManager.onNextLevelButtonClick += LoadNextLevel;
-        StartGame();
+        _canvasManager.onNextLevelButtonClick += LoadNextLevel;
+        _levelManager.LoadCurrentLevel();
     }
     public void StartGame()
     {
         SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
-        LoadFirstLevel();        
-        PlayerScore.GetInstance().ResetScore();
-    }
-    public void LoadFirstLevel()
-    {
-        _levelManager.LoadFirstLevel();
+                
+        PlayerScore.GetInstance().ResetTotalScore();
     }
     private void RetryLevel()
     {
@@ -40,14 +36,14 @@ public class GameManager : MonoBehaviour
     }
     private void LoadNextLevel()
     {
-        if (!_levelManager.IsLastLevel())
+        if (_levelManager.IsLastLevel())
         {
-            SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
-            _levelManager.LoadNextLevel();
+            SceneLoader.LoadScene(SceneLoader.SceneName.GameOverScene);            
         }
         else
         {
-            SceneLoader.LoadScene(SceneLoader.SceneName.GameOverScene);
+            SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
+            _levelManager.LoadNextLevel();
         }  
     }
     private void BackToMainMenu()

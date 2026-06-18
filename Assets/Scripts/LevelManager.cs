@@ -1,6 +1,5 @@
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameLevel[] _levelPrefabs;
     [SerializeField] private CinemachineCamera _camera;
 
-    private static int levelNumber = 0;
+    private static int _levelNumber = 0;
     private GameLevel _currentLevel;
 
     private void Start()
@@ -26,26 +25,25 @@ public class LevelManager : MonoBehaviour
     }
 
     //To load a level when starting a new game
-    private void LoadCurrentLevel()
+    public void LoadCurrentLevel()
     {
-        _currentLevel = Instantiate(_levelPrefabs[levelNumber], Vector3.zero, Quaternion.identity);
+        _currentLevel = Instantiate(_levelPrefabs[_levelNumber], Vector3.zero, Quaternion.identity);
         _playerDrone.transform.position = _currentLevel.GetDroneSpawnPosition();
         //_camera.Target.TrackingTarget = _currentLevel.GetCameraStartingTransform();
     }
     //To progress to next level. Should activate on button press
     public void LoadNextLevel()
     {
-        levelNumber++;
+        _levelNumber++;
         LoadCurrentLevel();
     }
-    public void LoadFirstLevel()
+    public int GetLevelNumber()
     {
-        levelNumber = 0;
-        LoadCurrentLevel();
+        return _levelNumber;
     }
     public bool IsLastLevel()
     {
-        return levelNumber < _levelPrefabs.Length - 1;
+        return _levelNumber >= _levelPrefabs.Length - 1;
     }
     private void OnDestroy()
     {
