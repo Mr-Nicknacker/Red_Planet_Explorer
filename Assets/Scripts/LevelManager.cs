@@ -8,30 +8,48 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameLevel[] _levelPrefabs;
     [SerializeField] private CinemachineCamera _camera;
 
-    private int _levelNumber = 0;
+    private static int levelNumber = 0;
     private GameLevel _currentLevel;
 
-    //To load a level when starting a new game
-    public void LoadLevel(int levelNumber)
+    private void Start()
     {
-        SceneManager.LoadScene(1);
+        DroneController.onDroneStateChange += ZoomIn;
+    }
+
+    private void ZoomIn(DroneController.DroneState state)
+    {
+        if (state == DroneController.DroneState.Operating)
+        {
+            //set camera gaming position
+            Debug.Log("zooming....");
+        }
+    }
+
+    //To load a level when starting a new game
+    private void LoadCurrentLevel()
+    {
         _currentLevel = Instantiate(_levelPrefabs[levelNumber], Vector3.zero, Quaternion.identity);
         _playerDrone.transform.position = _currentLevel.GetDroneSpawnPosition();
+        //_camera.Target.TrackingTarget = _currentLevel.GetCameraStartingTransform();
     }
     //To progress to next level. Should activate on button press
     public void LoadNextLevel()
     {
-        _levelNumber++;
-        if (_levelNumber < _levelPrefabs.Length)
-        {            
-            SceneManager.LoadScene(1);
-            _currentLevel = Instantiate(_levelPrefabs[_levelNumber], Vector3.zero, Quaternion.identity);
-            _playerDrone.transform.position = _currentLevel.GetDroneSpawnPosition();
-        }
-        else
-        {
-            SceneManager.LoadScene(null); // load game over scene with a total score
-        }
+        levelNumber++;
+        LoadCurrentLevel();
     }
-    private void ZoomOut(){}
+    public void LoadFirstLevel()
+    {
+        levelNumber = 0;
+        LoadCurrentLevel();
+    }
+    public bool IsLastLevel()
+    {
+        return levelNumber < _levelPrefabs.Length - 1;
+    }
+    private void OnDestroy()
+    {
+        DroneController.onDroneStateChange -= ZoomIn;
+    }
+
 }

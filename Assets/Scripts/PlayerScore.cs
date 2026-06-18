@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlayerScore
 {
     
-    private static int _currentScore;
+    private int _currentScore;
+    private static int _totalScore=0;
 
     public static event Action<int> onScoreChange;
 
@@ -19,17 +20,17 @@ public class PlayerScore
     }
     public void ResetScore()
     {
-        _currentScore = 0;
-        onScoreChange?.Invoke(_currentScore);
+        _totalScore = 0;
     }
-    public int GetCurrentScore()
+    public int GetTotalScore()
     {
-        return _currentScore;
+        return _totalScore;
     }
     public void AddScore(int amount)
     {
         int absScore = Mathf.Abs(amount);
         _currentScore += absScore;
+        _totalScore += _currentScore;
         onScoreChange?.Invoke(_currentScore);
     }
 

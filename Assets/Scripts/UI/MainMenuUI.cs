@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
@@ -12,11 +11,13 @@ public class MainMenuUI : MonoBehaviour
     }
     private void StartGame()
     {
-        SceneManager.LoadScene(1);
+        //GameManager._instance.StartGame();
+        SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
+        GameManager.Instance.LoadFirstLevel();
+        PlayerScore.GetInstance().ResetScore();
     }
     private void QuitGame()
     {
-        Debug.Log("Game quit");
         Application.Quit();
     }
     private void HandleButtonInput()

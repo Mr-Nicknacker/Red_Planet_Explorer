@@ -14,10 +14,10 @@ public class DroneController : MonoBehaviour
     private DroneState _droneState;
     private Vector2 _movementDirection;
 
-    private enum DroneState
+    public enum DroneState
     {
         WatingToStart,
-        Normal,
+        Operating,
         GameOver
     }
     public enum LandingState
@@ -26,6 +26,7 @@ public class DroneController : MonoBehaviour
         Landed
     }
         
+    public static event Action<DroneState> onDroneStateChange;
     public static event Action<LandingState> onLandingStateChange;
     public static event Action<OnPointsPickupArgs> onPointsPickup;
     public static event Action<OnFuelPickupArgs> onFuelPickup;
@@ -48,7 +49,7 @@ public class DroneController : MonoBehaviour
         _droneRigidbody.useGravity = false;
 
         _droneFuel = GetComponent<DroneFuel>();
-        _droneState = DroneState.WatingToStart;
+        ChangeDroneState(DroneState.WatingToStart); ;
 
         _droneDestructor = GetComponent<DroneDestructor>();
         _droneFuel.ResetFuel();
@@ -64,10 +65,10 @@ public class DroneController : MonoBehaviour
                 if (_movementDirection != Vector2.zero)
                 {
                     _droneRigidbody.useGravity = true;
-                    _droneState = DroneState.Normal;
+                    ChangeDroneState(DroneState.Operating);
                 }
                 break;
-            case DroneState.Normal:
+            case DroneState.Operating:
 
                 if (_droneFuel.GetCurrentFuel() <= 0)
                 {
@@ -116,8 +117,8 @@ public class DroneController : MonoBehaviour
         var landingAngleCoef = Vector3.Dot(Vector3.up, transform.up);
 
         if (landingSpeed > _landingSpeedThreshold || landingAngleCoef < _landingAngleThreshold)
-        {
-            _droneState = DroneState.GameOver;
+        {            
+            ChangeDroneState(DroneState.GameOver);
             onLandingStateChange?.Invoke(LandingState.Crashed);
             _droneDestructor.Detonate();
             return;
@@ -125,7 +126,7 @@ public class DroneController : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent<LandingPad>(out LandingPad landingPad))
         {
-            _droneState = DroneState.GameOver;
+            ChangeDroneState(DroneState.GameOver);
             onLandingStateChange?.Invoke(LandingState.Landed);
         }
         else
@@ -160,5 +161,10 @@ public class DroneController : MonoBehaviour
             onFuelPickup?.Invoke(pickupArgs);
             fuelPickup.DestroySelf();
         }
+    }
+    private void ChangeDroneState(DroneState newState)
+    {
+        _droneState = newState;
+        onDroneStateChange?.Invoke(newState);
     }
 }
