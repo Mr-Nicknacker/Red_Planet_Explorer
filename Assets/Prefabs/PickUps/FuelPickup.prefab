@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4997a1b6231623a43916da36b0170ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FuelGiver
-  _fuelToGive: 0
+  _fuelToGive: 50
 --- !u!65 &8634845043984098719
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4947263914463451126}
+  m_Father: {fileID: 5278235379927342812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!33 &2237793918711528818
 MeshFilter:
@@ -112,6 +112,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &712915841666881598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 662117249320519785}
+  m_Layer: 0
+  m_Name: CameraStartingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &662117249320519785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712915841666881598}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 18.9, y: 16.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4947263914463451126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1347454010151737045
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +175,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4947263914463451126}
+  m_Father: {fileID: 5278235379927342812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!33 &6830330731347796782
 MeshFilter:
@@ -236,7 +267,7 @@ GameObject:
   m_Layer: 0
   m_Name: DroneSpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -281,19 +312,11 @@ Transform:
   m_GameObject: {fileID: 4689221957138597502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.19911, y: -4.36889, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8572943986722624108}
-  - {fileID: 5962085617664515117}
-  - {fileID: 4904896331993980333}
-  - {fileID: 7572378577757275876}
-  - {fileID: 6843739516669973971}
-  - {fileID: 7389674932084486170}
-  - {fileID: 1652471129754942012}
-  - {fileID: 2561182215937274128}
-  - {fileID: 1261489035008651171}
+  - {fileID: 5278235379927342812}
   - {fileID: 7187535776338775502}
   - {fileID: 5441465066997246154}
   - {fileID: 7681980464555485040}
@@ -302,6 +325,8 @@ Transform:
   - {fileID: 1055818499530199272}
   - {fileID: 2553081545022523236}
   - {fileID: 5115788850017252210}
+  - {fileID: 662117249320519785}
+  - {fileID: 1261489035008651171}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7355380440805735949
@@ -317,7 +342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameLevel
   _droneSpawnPoint: {fileID: 1261489035008651171}
-  _cameraStartingTransform: {fileID: 0}
+  _cameraStartingTransform: {fileID: 662117249320519785}
+  _zoomedOutCameraDistance: 49
 --- !u!1 &6053704044808153886
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +376,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4947263914463451126}
+  m_Father: {fileID: 5278235379927342812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!33 &1040371863615771705
 MeshFilter:
@@ -462,7 +488,7 @@ Transform:
   m_LocalScale: {x: 120, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4947263914463451126}
+  m_Father: {fileID: 5278235379927342812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4843763747412809652
 MeshFilter:
@@ -574,7 +600,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4947263914463451126}
+  m_Father: {fileID: 5278235379927342812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!33 &3876716789139218664
 MeshFilter:
@@ -686,7 +712,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4947263914463451126}
+  m_Father: {fileID: 5278235379927342812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!33 &8334459427249779306
 MeshFilter:
@@ -766,6 +792,45 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8416566783229488822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5278235379927342812}
+  m_Layer: 0
+  m_Name: Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5278235379927342812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8416566783229488822}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8572943986722624108}
+  - {fileID: 5962085617664515117}
+  - {fileID: 4904896331993980333}
+  - {fileID: 7572378577757275876}
+  - {fileID: 6843739516669973971}
+  - {fileID: 7389674932084486170}
+  - {fileID: 1652471129754942012}
+  - {fileID: 2561182215937274128}
+  m_Father: {fileID: 4947263914463451126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8487700042580808635
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +863,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4947263914463451126}
+  m_Father: {fileID: 5278235379927342812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!33 &5064128044106183640
 MeshFilter:
@@ -910,7 +975,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4947263914463451126}
+  m_Father: {fileID: 5278235379927342812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!33 &9158325183696049651
 MeshFilter:
@@ -1040,7 +1105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169858505631710154, guid: 75d5945ea449fa74f978e20485e448e9, type: 3}
       propertyPath: m_Name
-      value: PointsPickup (2)
+      value: ResearchItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1102,7 +1167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169858505631710154, guid: 75d5945ea449fa74f978e20485e448e9, type: 3}
       propertyPath: m_Name
-      value: PointsPickup (4)
+      value: ResearchItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1164,7 +1229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169858505631710154, guid: 75d5945ea449fa74f978e20485e448e9, type: 3}
       propertyPath: m_Name
-      value: PointsPickup (1)
+      value: ResearchItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1226,7 +1291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169858505631710154, guid: 75d5945ea449fa74f978e20485e448e9, type: 3}
       propertyPath: m_Name
-      value: PointsPickup (3)
+      value: ResearchItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1354,7 +1419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169858505631710154, guid: 75d5945ea449fa74f978e20485e448e9, type: 3}
       propertyPath: m_Name
-      value: PointsPickup
+      value: ResearchItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1416,7 +1481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5169858505631710154, guid: 75d5945ea449fa74f978e20485e448e9, type: 3}
       propertyPath: m_Name
-      value: PointsPickup (5)
+      value: ResearchItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

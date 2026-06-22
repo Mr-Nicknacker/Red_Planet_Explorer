@@ -22,17 +22,12 @@ public class GameManager : MonoBehaviour
         ToMainMenuButtonNotifier.OnToMainMenuButtonClick += BackToMainMenu;
         _canvasManager.onNextLevelButtonClick += LoadNextLevel;
         _levelManager.LoadCurrentLevel();
-    }
-    public void StartGame()
-    {
-        SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
-                
-        PlayerScore.GetInstance().ResetTotalScore();
+        Time.timeScale = 1f;
     }
     private void RetryLevel()
     {
+        Time.timeScale = 1f;
         SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
-        //time.timescale=1;
     }
     private void LoadNextLevel()
     {

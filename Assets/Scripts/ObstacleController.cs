@@ -15,6 +15,7 @@ public class ObstacleController : MonoBehaviour
     private int _pointIndex = 0;
 
     private Vector3 _nextPoint;
+    private Rigidbody _obstacleRigidBody;
 
     private bool _isMovingBack = false;
     private bool _hasEnoughPoints;
@@ -26,6 +27,8 @@ public class ObstacleController : MonoBehaviour
         _pathPointsList = GetPathPoints();
         _nextPoint = GetNextPoint(_pathPointsList);
         _hasEnoughPoints = GetPathPoints().Count > 1;
+
+        _obstacleRigidBody = GetComponent<Rigidbody>();
     }
     private void FixedUpdate()
     {
@@ -57,14 +60,14 @@ public class ObstacleController : MonoBehaviour
     }
     private Vector3 GetNextPoint(List<Transform> pathPointsList)
     {
-        if (_pointIndex == 0)
+        if (_pointIndex <= 0)
         {
             _isMovingBack = false;
         }
         else if (_pointIndex >= pathPointsList.Count)
         {
             _isMovingBack = true;
-            _pointIndex = pathPointsList.Count - 2;
+            _pointIndex = pathPointsList.Count - 1;
 
         }
         Vector3 nextPoint = pathPointsList[_pointIndex].position;
@@ -82,6 +85,9 @@ public class ObstacleController : MonoBehaviour
     private void HandleMovement(Vector3 targetPoint)
     {
         float moveSpeed = _movementSpeed * Time.fixedDeltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targetPoint, moveSpeed);
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPoint, moveSpeed);
+        _obstacleRigidBody.MovePosition(newPosition);
+
+
     }
 }

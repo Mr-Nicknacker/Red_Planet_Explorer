@@ -24,7 +24,7 @@ public class StatsDisplay : MonoBehaviour
     }
     private void DisplayPoints(int points)
     {
-        _statsNumbers.text =$"{points}";
+        _statsNumbers.text = points.ToString();
     }
     private void OnDisable()
     {
@@ -33,6 +33,7 @@ public class StatsDisplay : MonoBehaviour
     }
     private void ChangeFuelBarFillColor(float fuelRemaining)
     {
+        Debug.Log($"{GetType().FullName} - remaining fuel is: {fuelRemaining}");
         if (fuelRemaining > 2/3)
         {
             _fuelBarFill.color = _fullFuelColor;

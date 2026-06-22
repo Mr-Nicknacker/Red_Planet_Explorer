@@ -112,7 +112,8 @@ public class DroneController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         float landingSpeed = collision.relativeVelocity.magnitude;
-        var landingAngleCoef = Vector3.Dot(Vector3.up, transform.up);
+        float landingAngleCoef = Vector3.Dot(Vector3.up, transform.up);
+        int scoreMultiplier;
 
         if (landingSpeed > _landingSpeedThreshold || landingAngleCoef < _landingAngleThreshold)
         {            
@@ -124,6 +125,9 @@ public class DroneController : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent<LandingPad>(out LandingPad landingPad))
         {
+            scoreMultiplier = landingPad.GetScoreMultiplier();
+            Debug.Log($"Collided by {name}");
+            PlayerScore.GetInstance().ComputeMultiplier(scoreMultiplier);
             ChangeDroneState(DroneState.GameOver);
             onLandingStateChange?.Invoke(LandingState.Landed);
         }

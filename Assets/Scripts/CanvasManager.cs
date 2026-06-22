@@ -61,10 +61,6 @@ public class CanvasManager : MonoBehaviour
         _victoryWindowCanvas.SetActive(false);
         _defeatWindowCanvas.gameObject.SetActive(false);
     }
-    private void ResetGame()
-    {
-        UnPauseGame();
-    }
     private void PauseGame()
     {
         Time.timeScale = 0.0f;
