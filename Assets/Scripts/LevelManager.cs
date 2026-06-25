@@ -1,3 +1,4 @@
+using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -9,8 +10,19 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CameraZoomHandler _cameraZoomHandler;
 
     private static int _levelNumber = 0;
-    private GameLevel _currentLevel;    
+    private GameLevel _currentLevel;
 
+    public event Action<int> onLevelChange;
+    public static LevelManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else Instance = this;
+    }
     private void Start()
     {
         DroneController.onDroneStateChange += ZoomIn;        
@@ -28,14 +40,14 @@ public class LevelManager : MonoBehaviour
     public void LoadCurrentLevel()
     {
         _currentLevel = Instantiate(_levelPrefabs[_levelNumber], Vector3.zero, Quaternion.identity);        
-        _playerDrone.gameObject.transform.position = _currentLevel.GetDroneSpawnPosition();        
+        _playerDrone.transform.position = _currentLevel.GetDroneSpawnPosition();        
         _camera.Target.TrackingTarget = _currentLevel.GetCameraStartingTransform();
         _cameraZoomHandler.ZoomCamera(_currentLevel.GetZoomedOutCameraDistance());
+        onLevelChange?.Invoke(_levelNumber);
     }
     public void LoadNextLevel()
     {
         _levelNumber++;
-        LoadCurrentLevel();
     }
     public int GetLevelNumber()
     {
@@ -44,6 +56,12 @@ public class LevelManager : MonoBehaviour
     public bool IsLastLevel()
     {
         return _levelNumber >= _levelPrefabs.Length - 1;
+    }
+    public void ResetLevels()
+    {
+        _levelNumber = 0;
+        Debug.Log("Resetting levels");
+        onLevelChange?.Invoke(_levelNumber);
     }
     private void OnDestroy()
     {

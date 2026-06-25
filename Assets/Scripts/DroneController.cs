@@ -9,7 +9,6 @@ public class DroneController : MonoBehaviour
     [SerializeField] private float _landingAngleThreshold;
 
     private Rigidbody _droneRigidbody;
-    private DroneFuel _droneFuel;
     private DroneDestructor _droneDestructor;
     private DroneState _droneState;
     private Vector2 _movementDirection;
@@ -30,6 +29,10 @@ public class DroneController : MonoBehaviour
     public static event Action<LandingState> onLandingStateChange;
     public static event Action<OnPointsPickupArgs> onPointsPickup;
     public static event Action<OnFuelPickupArgs> onFuelPickup;
+    public static event Action onForceUp;
+    public static event Action onForceLeft;
+    public static event Action onForceRight;
+    public static event Action onForceNone;
 
     public class OnPointsPickupArgs : EventArgs
     {
@@ -48,16 +51,16 @@ public class DroneController : MonoBehaviour
         _droneRigidbody.sleepThreshold = 0f;
         _droneRigidbody.useGravity = false;
 
-        _droneFuel = GetComponent<DroneFuel>();
         ChangeDroneState(DroneState.WatingToStart); ;
 
         _droneDestructor = GetComponent<DroneDestructor>();
-        _droneFuel.ResetFuel();        
     }
 
     private void FixedUpdate()
     {
         _movementDirection = PlayerInputListener.GetInstance().GetMovementVector2();
+        onForceNone?.Invoke();
+
         switch (_droneState)
         {
             case DroneState.WatingToStart:
@@ -69,27 +72,30 @@ public class DroneController : MonoBehaviour
                 break;
             case DroneState.Operating:
 
-                if (_droneFuel.GetCurrentFuel() <= 0)
+                if (DroneFuel.Instance.GetCurrentFuel() <= 0)
                 {
                     return;
                 }
                 if ((_movementDirection != Vector2.zero))
                 {
-                    _droneFuel.ConsumeFuel();
+                    DroneFuel.Instance.ConsumeFuel();
                 }
 
                 if (_movementDirection.y > 0)
                 {
                     ApplyUpForce();
+                    onForceUp?.Invoke();
                 }
                 if (_movementDirection.x < 0)
                 {
                     ApplyLeftYaw();
+                    onForceLeft?.Invoke();
 
                 }
                 if (_movementDirection.x > 0)
                 {
                     ApplyRightYaw();
+                    onForceRight?.Invoke();
                 }
                 break;
             case DroneState.GameOver:
@@ -126,7 +132,6 @@ public class DroneController : MonoBehaviour
         if (collision.gameObject.TryGetComponent<LandingPad>(out LandingPad landingPad))
         {
             scoreMultiplier = landingPad.GetScoreMultiplier();
-            Debug.Log($"Collided by {name}");
             PlayerScore.GetInstance().ComputeMultiplier(scoreMultiplier);
             ChangeDroneState(DroneState.GameOver);
             onLandingStateChange?.Invoke(LandingState.Landed);
@@ -142,7 +147,7 @@ public class DroneController : MonoBehaviour
         if (other.TryGetComponent<PointsPickup>(out PointsPickup pointsPickup))
         {
             int pointsReceived = pointsPickup.GetPoints();
-            Debug.Log($"Item gives {pointsReceived} points");
+
             OnPointsPickupArgs pointsPickupArgs = new()
             {
                 pointsAmount = pointsReceived,
@@ -155,7 +160,7 @@ public class DroneController : MonoBehaviour
         if (other.TryGetComponent<FuelPickup>(out FuelPickup fuelPickup))
         {
             float fuelReceived = fuelPickup.GetFuel();
-            Debug.Log($"Item gives {fuelReceived} fuel");
+
             OnFuelPickupArgs fuelPickupArgs = new()
             {
                 fuelAmount = fuelReceived,

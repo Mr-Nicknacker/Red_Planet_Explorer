@@ -4,17 +4,24 @@ using UnityEngine.UI;
 
 public class StatsDisplay : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _statsNumbers;
+    [SerializeField] private TextMeshProUGUI _scoreValue;
+    [SerializeField] private TextMeshProUGUI _levelNumber;
     [SerializeField] private Image _fuelBarFill;
     [Header("Fuel bar colors")]
     [SerializeField] private Color _fullFuelColor;
     [SerializeField] private Color _twoThirdsFuelColor;
     [SerializeField] private Color _thirdFuelColor;
-    
-    void Start()
+
+    private void Update()
     {
-        DroneFuel.onFuelChangeNormalized += DisplayFuel;
-        PlayerScore.GetInstance().onScoreChange += DisplayPoints;
+        DisplayLevel(GameManager.Instance.GetLevelNumber() + 1);
+        DisplayFuel(DroneFuel.Instance.GetFuelNormalized());
+        DisplayPoints(PlayerScore.GetInstance().GetCurrentScore());
+    }
+
+    private void DisplayLevel(int level)
+    {
+        _levelNumber.text = level.ToString();
     }
 
     private void DisplayFuel(float normalizedFuel)
@@ -24,25 +31,23 @@ public class StatsDisplay : MonoBehaviour
     }
     private void DisplayPoints(int points)
     {
-        _statsNumbers.text = points.ToString();
-    }
-    private void OnDisable()
-    {
-        DroneFuel.onFuelChangeNormalized -= DisplayFuel;
-        PlayerScore.GetInstance().onScoreChange -= DisplayPoints;
+        _scoreValue.text = points.ToString();
     }
     private void ChangeFuelBarFillColor(float fuelRemaining)
     {
-        Debug.Log($"{GetType().FullName} - remaining fuel is: {fuelRemaining}");
-        if (fuelRemaining > 2/3)
+
+        float twoThirdsTank = 2 / 3f;
+        float thirdTank = 1 / 3f;
+
+        if (fuelRemaining > twoThirdsTank)
         {
             _fuelBarFill.color = _fullFuelColor;
         }
-        if (fuelRemaining <= 2/3)
+        if (fuelRemaining <= twoThirdsTank)
         {
             _fuelBarFill.color = _twoThirdsFuelColor;
         }
-        if (fuelRemaining <= 1/3)
+        if (fuelRemaining <= thirdTank)
         {
             _fuelBarFill.color = _thirdFuelColor;
         }

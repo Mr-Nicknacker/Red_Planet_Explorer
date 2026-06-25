@@ -3,8 +3,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private CanvasManager _canvasManager;
-    [SerializeField] private LevelManager _levelManager;
-    
     
     public static GameManager Instance { get; private set; }
 
@@ -21,7 +19,14 @@ public class GameManager : MonoBehaviour
         RetryButtonNotifier.OnRetryButtonClick += RetryLevel;
         ToMainMenuButtonNotifier.OnToMainMenuButtonClick += BackToMainMenu;
         _canvasManager.onNextLevelButtonClick += LoadNextLevel;
-        _levelManager.LoadCurrentLevel();
+
+        LevelManager.Instance.LoadCurrentLevel();
+        StartLevel();
+    }
+    private void StartLevel()
+    {
+        PlayerScore.GetInstance().ResetCurrentScore();
+        DroneFuel.Instance.ResetFuel();
         Time.timeScale = 1f;
     }
     private void RetryLevel()
@@ -31,19 +36,27 @@ public class GameManager : MonoBehaviour
     }
     private void LoadNextLevel()
     {
-        if (_levelManager.IsLastLevel())
+        if (LevelManager.Instance.IsLastLevel())
         {
             SceneLoader.LoadScene(SceneLoader.SceneName.GameOverScene);            
         }
         else
         {
             SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
-            _levelManager.LoadNextLevel();
+            LevelManager.Instance.LoadNextLevel();
+            StartLevel();
         }  
     }
     private void BackToMainMenu()
     {
         SceneLoader.LoadScene(SceneLoader.SceneName.MainMenuScene);
     }
-
+    public void ResetToFirstLevel()
+    {
+        LevelManager.Instance.ResetLevels();
+    }
+    public int GetLevelNumber()
+    {
+        return LevelManager.Instance.GetLevelNumber();
+    }
 }

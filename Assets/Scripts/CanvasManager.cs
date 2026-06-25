@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,7 +16,9 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Button _pauseButton;
     [SerializeField] private Button _resumeGame;
     [SerializeField] private Button _nextLevelButton;
-    [SerializeField] private Button _toMainMenuButton;
+    [Header("Window texts")]
+    [SerializeField] private TextMeshProUGUI _victoryWindowScoreText;
+    [SerializeField] private TextMeshProUGUI _defeatWindowScoreText;
     [Header("Delay to show a screen")]
     [SerializeField] private float _timeToShowVictory;
     [SerializeField] private float _timeToShowDefeat;
@@ -48,11 +51,13 @@ public class CanvasManager : MonoBehaviour
     private IEnumerator ShowDefeatWindow()
     {
         yield return new WaitForSeconds(_timeToShowDefeat);
+        _defeatWindowScoreText.text = "—чет: " + PlayerScore.GetInstance().GetTotalScore().ToString();
         _defeatWindowCanvas.SetActive(true);
     }
     private IEnumerator ShowVictoryWindow()
     {
         yield return new WaitForSeconds(_timeToShowVictory);
+        _victoryWindowScoreText.text = "—чет: " + PlayerScore.GetInstance().GetTotalScore().ToString();
         _victoryWindowCanvas.SetActive(true);       
     }
     private void ShowGameWindow()

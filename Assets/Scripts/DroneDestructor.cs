@@ -6,7 +6,7 @@ public class DroneDestructor : MonoBehaviour
 {
     [SerializeField] private GameObject _droneMesh;
     private Transform[] _meshPartsArr;
-    private List<Transform> _meshPartsList=new();
+    private List<Transform> _meshPartsList = new();
 
     [Header("Explosion parameters")]
     [SerializeField] private float _explosionForce;
@@ -31,7 +31,7 @@ public class DroneDestructor : MonoBehaviour
             Rigidbody meshPartRigidBody = InitializePartsPhysics(part.gameObject);
             ApplyExplosionForce(meshPartRigidBody);
         }
-        StartCoroutine(HideExplodedParts(_meshPartsList));
+        DestroyDrone();
     }
     private Rigidbody InitializePartsPhysics(GameObject meshPart)
     {
@@ -49,14 +49,9 @@ public class DroneDestructor : MonoBehaviour
             _explosionUpwardsModifier,
             ForceMode.VelocityChange);
     }
-    private IEnumerator HideExplodedParts(List<Transform> explodedParts)
+    private void DestroyDrone()
     {
-        yield return new WaitForSeconds(_explodedPartsDestroyTime);
-        foreach (Transform part in explodedParts)
-        {
-            part.gameObject.SetActive(false);
-        }
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);    
     }
     private void OnDisable()
     {

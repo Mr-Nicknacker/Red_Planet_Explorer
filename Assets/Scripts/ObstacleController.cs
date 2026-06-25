@@ -87,7 +87,5 @@ public class ObstacleController : MonoBehaviour
         float moveSpeed = _movementSpeed * Time.fixedDeltaTime;
         Vector3 newPosition = Vector3.MoveTowards(transform.position, targetPoint, moveSpeed);
         _obstacleRigidBody.MovePosition(newPosition);
-
-
     }
 }

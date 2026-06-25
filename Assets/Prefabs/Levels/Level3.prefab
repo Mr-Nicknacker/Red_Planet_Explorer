@@ -1586,43 +1586,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5915181756449264581, guid: d70dc7f7bfcb29e419823be73c603d64, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8485010151050431400}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d70dc7f7bfcb29e419823be73c603d64, type: 3}
---- !u!1 &6038860671021200445 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5915181756449264581, guid: d70dc7f7bfcb29e419823be73c603d64, type: 3}
-  m_PrefabInstance: {fileID: 133038430229374968}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &8485010151050431400
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6038860671021200445}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 3
 --- !u!4 &9002462581799739062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9022831811300391246, guid: d70dc7f7bfcb29e419823be73c603d64, type: 3}
@@ -1927,6 +1892,10 @@ PrefabInstance:
     - target: {fileID: 5891392679734482233, guid: 7b19b7189fabcd54091e2b2fb123f9ca, type: 3}
       propertyPath: m_Name
       value: LandingPad_x7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847278348989591532, guid: 7b19b7189fabcd54091e2b2fb123f9ca, type: 3}
+      propertyPath: m_text
+      value: x7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
