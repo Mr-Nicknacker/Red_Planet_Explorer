@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class DroneFuel : MonoBehaviour
@@ -9,7 +8,7 @@ public class DroneFuel : MonoBehaviour
 
     public static DroneFuel Instance { get; private set; }
 
-    private void Awake()
+    public void Initialize()
     {
         if (Instance != null && Instance != this)
         {

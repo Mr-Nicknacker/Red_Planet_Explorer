@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 
+//The scrip is located on a Lander Panel prefab
 public class ScoreMultiplierDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshPro _multiplierText;

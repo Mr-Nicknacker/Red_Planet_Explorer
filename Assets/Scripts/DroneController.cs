@@ -45,7 +45,7 @@ public class DroneController : MonoBehaviour
         public Transform pickupTransform;
     };
 
-    private void Awake()
+    public void Initialize()
     {
         _droneRigidbody = GetComponent<Rigidbody>();
         _droneRigidbody.sleepThreshold = 0f;

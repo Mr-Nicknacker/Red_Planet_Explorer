@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     public event Action<int> onLevelChange;
     public static LevelManager Instance { get; private set; }
 
-    private void Awake()
+    public void Initialize()
     {
         if (Instance != null && Instance != this)
         {

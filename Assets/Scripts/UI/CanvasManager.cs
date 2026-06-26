@@ -1,14 +1,14 @@
+using DG.Tweening;
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
     [Header("UI Canvases")]
     [SerializeField] private GameObject _victoryWindowCanvas;
+    [SerializeField] private GameObject _defeatWindowPanel;
     [SerializeField] private GameObject _defeatWindowCanvas;
     [SerializeField] private GameObject _pauseWindowCanvas;
     [SerializeField] private GameObject _gameHUD;
@@ -20,15 +20,15 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _victoryWindowScoreText;
     [SerializeField] private TextMeshProUGUI _defeatWindowScoreText;
     [Header("Delay to show a screen")]
-    [SerializeField] private float _timeToShowVictory;
-    [SerializeField] private float _timeToShowDefeat;
+
+    private bool _isPausable = true;
 
     public event Action onNextLevelButtonClick;
 
-    private void Awake()
+    public void Initialize()
     {
         HandleButtonInput();
-        ShowGameWindow(); 
+        ShowGameWindow();
     }
     private void Start()
     {
@@ -41,37 +41,42 @@ public class CanvasManager : MonoBehaviour
         switch (state)
         {
             case DroneController.LandingState.Crashed:
-                StartCoroutine(ShowDefeatWindow());
+                ShowDefeatWindow();
+                _isPausable = false;
                 break;
             case DroneController.LandingState.Landed:
-                StartCoroutine(ShowVictoryWindow());
+                ShowVictoryWindow();
+                _isPausable = false;
                 break;
         }
     }
-    private IEnumerator ShowDefeatWindow()
+    private void ShowDefeatWindow()
     {
-        yield return new WaitForSeconds(_timeToShowDefeat);
-        _defeatWindowScoreText.text = "—чет: " + PlayerScore.GetInstance().GetTotalScore().ToString();
+        float tweenDelay=0.5f;
+        float animationTime = 0.15f;
+
+        _defeatWindowScoreText.text = "—чет: " + PlayerScore.GetInstance().GetCurrentScore().ToString();
         _defeatWindowCanvas.SetActive(true);
+ 
+        _defeatWindowPanel.transform.DOScale(1,animationTime).From(0).SetEase(Ease.InCirc).SetDelay(tweenDelay);
     }
-    private IEnumerator ShowVictoryWindow()
+    private void ShowVictoryWindow()
     {
-        yield return new WaitForSeconds(_timeToShowVictory);
-        _victoryWindowScoreText.text = "—чет: " + PlayerScore.GetInstance().GetTotalScore().ToString();
-        _victoryWindowCanvas.SetActive(true);       
+        _victoryWindowScoreText.text = "—чет: " + PlayerScore.GetInstance().GetCurrentScore().ToString();
+        _victoryWindowCanvas.gameObject.SetActive(true);
     }
     private void ShowGameWindow()
     {
         _gameHUD.SetActive(true);
-        _victoryWindowCanvas.SetActive(false);
-        _defeatWindowCanvas.gameObject.SetActive(false);
+        _victoryWindowCanvas.gameObject.SetActive(false);
+        _defeatWindowCanvas.SetActive(false);
     }
     private void PauseGame()
     {
         Time.timeScale = 0.0f;
         _gameHUD.SetActive(false);
-        _victoryWindowCanvas.SetActive(false);
-        _defeatWindowCanvas.gameObject.SetActive(false);
+        _victoryWindowCanvas.gameObject.SetActive(false);
+        _defeatWindowCanvas.SetActive(false);
         _pauseWindowCanvas.SetActive(true);
     }
     private void UnPauseGame()
@@ -82,7 +87,7 @@ public class CanvasManager : MonoBehaviour
     }
     private void PauseUnpause()
     {
-        if (Time.timeScale > 0)
+        if (Time.timeScale > 0 && _isPausable)
         {
             PauseGame();
         }

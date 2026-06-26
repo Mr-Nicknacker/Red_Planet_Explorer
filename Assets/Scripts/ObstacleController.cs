@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//The scrip is located on a moving obstacle prefab
 public class ObstacleController : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;

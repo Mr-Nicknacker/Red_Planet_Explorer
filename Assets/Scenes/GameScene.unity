@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 231138283}
   - component: {fileID: 231138282}
   - component: {fileID: 231138281}
+  - component: {fileID: 231138285}
   m_Layer: 5
   m_Name: DefeatCanvas
   m_TagString: Untagged
@@ -468,6 +469,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &231138285
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231138280}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b3ffbbc2d70ac14a8da23a5ec9b3e17, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &289721892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,8 +1175,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -741.5, y: 455}
-  m_SizeDelta: {x: -1483, y: -910}
+  m_AnchoredPosition: {x: -730, y: 455}
+  m_SizeDelta: {x: -1460, y: -910}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &450499679
 MonoBehaviour:
@@ -1622,7 +1645,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1484.1526, y: 622.1638}
+  m_SizeDelta: {x: 1484, y: 625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910235042
 MonoBehaviour:
@@ -1886,7 +1909,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1484.1526, y: 622.1638}
+  m_SizeDelta: {x: 1484, y: 625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1110104338
 MonoBehaviour:
@@ -2864,6 +2887,8 @@ GameObject:
   - component: {fileID: 1338487548}
   - component: {fileID: 1338487547}
   - component: {fileID: 1338487546}
+  - component: {fileID: 1338487550}
+  - component: {fileID: 1338487551}
   m_Layer: 5
   m_Name: VictoryCanvas
   m_TagString: Untagged
@@ -2954,6 +2979,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &1338487550
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338487545}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &1338487551
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338487545}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: af1a6265d2b762b4789da2fdad154697, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1435434061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3539,7 +3598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraShake
   _impulseSource: {fileID: 1675975514}
-  number: 3
+  number: 4
 --- !u!1 &1697324939
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,6 +3901,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924715d6ad13f5041ba6b949b04fdd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
+  _gameManager: {fileID: 1510963204}
+  _droneController: {fileID: 2822385666437206911}
+  _droneFuel: {fileID: 2822385666437206908}
+  _levelManager: {fileID: 795831364}
 --- !u!1 &1848418597
 GameObject:
   m_ObjectHideFlags: 0
@@ -4397,6 +4460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _victoryWindowCanvas: {fileID: 1338487545}
+  _defeatWindowPanel: {fileID: 910235040}
   _defeatWindowCanvas: {fileID: 231138280}
   _pauseWindowCanvas: {fileID: 1885361088}
   _gameHUD: {fileID: 653570901}
@@ -4405,8 +4469,6 @@ MonoBehaviour:
   _nextLevelButton: {fileID: 1440996465}
   _victoryWindowScoreText: {fileID: 2036255227}
   _defeatWindowScoreText: {fileID: 1435434062}
-  _timeToShowVictory: 1.5
-  _timeToShowDefeat: 0.5
 --- !u!1 &2036255225
 GameObject:
   m_ObjectHideFlags: 0
@@ -4786,6 +4848,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2eaf4f6f399864dab83ed93756cac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroneFuel
+--- !u!114 &2822385666437206911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6945692991483344168, guid: f3107da07dd1e334683ece196989377d, type: 3}
+  m_PrefabInstance: {fileID: 2822385666437206905}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822385666437206906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e13606dd4eee04c9f84b0fb7be8d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DroneController
 --- !u!1001 &6530852376357210236
 PrefabInstance:
   m_ObjectHideFlags: 0
