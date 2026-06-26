@@ -8,7 +8,7 @@ public class DroneFuel : MonoBehaviour
 
     public static DroneFuel Instance { get; private set; }
 
-    public void Initialize()
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {

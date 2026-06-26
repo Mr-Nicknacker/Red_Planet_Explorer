@@ -1363,7 +1363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b6a3e7dfb062a04f8ee2d145ef1ddd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  _playerDrone: {fileID: 2822385666437206906}
+  _playerDrone: {fileID: 1887098191}
   _levelPrefabs:
   - {fileID: 7355380440805735949, guid: 53696bba9eb25d644a52b66665a1fd61, type: 3}
   - {fileID: 7355380440805735949, guid: d930fee22dc33e94c853b2b2f283ffc2, type: 3}
@@ -3901,10 +3901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924715d6ad13f5041ba6b949b04fdd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
-  _gameManager: {fileID: 1510963204}
   _droneController: {fileID: 2822385666437206911}
-  _droneFuel: {fileID: 2822385666437206908}
-  _levelManager: {fileID: 795831364}
 --- !u!1 &1848418597
 GameObject:
   m_ObjectHideFlags: 0
@@ -4832,17 +4829,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3107da07dd1e334683ece196989377d, type: 3}
---- !u!1 &2822385666437206906 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3171341516585977579, guid: f3107da07dd1e334683ece196989377d, type: 3}
-  m_PrefabInstance: {fileID: 2822385666437206905}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2822385666437206908 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4070660432656182576, guid: f3107da07dd1e334683ece196989377d, type: 3}
   m_PrefabInstance: {fileID: 2822385666437206905}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822385666437206906}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a2eaf4f6f399864dab83ed93756cac5, type: 3}
@@ -4853,7 +4845,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6945692991483344168, guid: f3107da07dd1e334683ece196989377d, type: 3}
   m_PrefabInstance: {fileID: 2822385666437206905}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2822385666437206906}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99e13606dd4eee04c9f84b0fb7be8d8a, type: 3}

@@ -25,7 +25,7 @@ public class CanvasManager : MonoBehaviour
 
     public event Action onNextLevelButtonClick;
 
-    public void Initialize()
+    private void Awake()
     {
         HandleButtonInput();
         ShowGameWindow();
