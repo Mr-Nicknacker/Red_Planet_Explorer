@@ -59,6 +59,7 @@ public class LevelManager : MonoBehaviour
     }
     public void ResetLevels()
     {
+        Debug.Log("resseting levels");
         _levelNumber = 0;
         onLevelChange?.Invoke(_levelNumber);
     }
