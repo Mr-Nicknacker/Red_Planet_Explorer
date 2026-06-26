@@ -13,7 +13,6 @@ public class MainMenuUI : MonoBehaviour
     {
         SceneLoader.LoadScene(SceneLoader.SceneName.GameScene);
         PlayerScore.GetInstance().ResetTotalScore();
-        GameManager.Instance.ResetToFirstLevel();
     }
     private void QuitGame()
     {

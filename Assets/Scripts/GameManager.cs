@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     {
         if (LevelManager.Instance.IsLastLevel())
         {
+            ResetToFirstLevel();
             SceneLoader.LoadScene(SceneLoader.SceneName.GameOverScene);            
         }
         else
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
     }
     private void BackToMainMenu()
     {
+        ResetToFirstLevel();
         SceneLoader.LoadScene(SceneLoader.SceneName.MainMenuScene);
     }
     public void ResetToFirstLevel()
